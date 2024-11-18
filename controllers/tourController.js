@@ -29,5 +29,4 @@ exports.createTour = async (req, res) => {
   }
 };
 
-//chình sửa tour thay đổi toàn bộ
-// exports.updateTour = async (req, res) => {};
+

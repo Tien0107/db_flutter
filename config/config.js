@@ -17,13 +17,13 @@ const config = {
     port: 5000
   }
 };
-// TODO : Connect to db4free.net ST22B
+// TODO : Connect to db4free.net 
 // LTDD:....
 // const config = {
 //   database: {
-//     name: 'batdongsandanang',
-//     username: 'taquocy',
-//     password: 'Y649394$y',
+//     name: 'wwbe',
+//     username: '',
+//     password: '',
 //     host: 'db4free.net',
 //     dialect: 'mysql',
 //     logging: console.log
@@ -51,7 +51,7 @@ const sequelize = new Sequelize(
 // Kiểm tra kết nối cơ sở dữ liệu
 sequelize.authenticate()
   .then(() => {
-    console.log('Kết nối thành công với cơ sở dữ liệu MySQL');
+    console.log('Kết nối thành công với cơ sở dữ liệu ');
   })
   .catch(err => {
     console.error('Lỗi kết nối:', err);
