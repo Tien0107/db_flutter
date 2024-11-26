@@ -1,26 +1,38 @@
-const { DataTypes } = require('sequelize');
-const { sequelize } = require('../config/config');
+const mongoose = require('mongoose');
 
 // Định nghĩa model Tour với Sequelize
-const Tour = sequelize.define('Tour', {
+const tourSchema = new mongoose.Schema({
   cityName: {
-    type: DataTypes.STRING,
-    allowNull: false
+    type: String,
+    required: [true, 'phai co cityName'],
+    trim: true
   },
   days: {
-    type: DataTypes.STRING,
-    allowNull: false
+    type: String,
+    required: [true, 'phai co days'],
+    trim: true
   },
   price: {
-    type: DataTypes.STRING,
-    allowNull: false
+    type: String,
+    required: [true, 'phai co price'],
+    trim: true
   },
   avatar: {
-    type: DataTypes.STRING
+    type: String,
+    default: 'default.jpg'
   }
 }, {
-  tableName: 'Tour',
-  timestamps: false  // Nếu không muốn sử dụng cột createdAt và updatedAt
+  timestamps: false,  
+  collection: 'Tour'
+});
+
+const Tour = mongoose.model('Tour', tourSchema);
+tourSchema.pre('save', async function(next) {
+  if(!this.id){
+    const lastTour = await this.constructor.findOne({} , {}, {sort: {'id': -1}});
+    this.id = lastTour ? lastTour.id + 1 : 1;
+  }
+  next();
 });
 
 module.exports = Tour;
